@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Git Öğreticisi</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <i class="fab fa-git-alt"></i>
+                <span>Git Öğreticisi</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#giris" class="nav-link">Giriş</a></li>
+                <li><a href="#git-nedir" class="nav-link">Git Nedir</a></li>
+                <li><a href="#neden-git" class="nav-link">Neden Git</a></li>
+                <li><a href="#temel-komutlar" class="nav-link">Temel Komutlar</a></li>
+                <li><a href="#dallanma" class="nav-link">Dallanma</a></li>
+                <li><a href="#uzak-repo" class="nav-link">Uzak Repo</a></li>
+                <li><a href="#iş-akışı" class="nav-link">İş Akışı</a></li>
+                <li><a href="#git-ipuclari" class="nav-link">İpuçları</a></li>
+            </ul>
+            <div class="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero" id="giris">
+            <div class="hero-content">
+                <h1 class="animate-title">Git ile Versiyon Kontrolü</h1>
+                <p class="animate-text">Projelerinizi güvenle yönetin, işbirliği yapın ve kodunuzu takip edin.</p>
+                <div class="hero-buttons">
+                    <a href="#git-nedir" class="btn primary-btn">Öğrenmeye Başla</a>
+                    <a href="https://git-scm.com/downloads" target="_blank" class="btn secondary-btn">Git İndir</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="git-animation">
+                    <div class="branch main-branch"></div>
+                    <div class="commit c1"></div>
+                    <div class="commit c2"></div>
+                    <div class="commit c3"></div>
+                    <div class="branch feature-branch"></div>
+                    <div class="commit c4"></div>
+                    <div class="merge-point"></div>
+                </div>
+            </div>
+        </section>
+        <section class="section" id="git-nedir">
+            <h2 class="section-title">Git Nedir?</h2>
+            <div class="about-git-container">
+                <div class="about-git-content" data-aos="fade-right">
+                    <h3>Git'in Tanımı ve Tarihi</h3>
+                    <p>Git, 2005 yılında Linux işletim sisteminin yaratıcısı <strong>Linus Torvalds</strong> tarafından geliştirilmiş, dağıtık bir versiyon kontrol sistemidir. Linus, Linux çekirdeği geliştirmesi için daha iyi bir araç arayışındaydı ve mevcut çözümlerden memnun olmadığı için Git'i oluşturdu.</p>
+                    
+                    <p>Git'in adı, Linus'un kendi ifadesiyle "aptal, basit ama etkili" anlamına gelen İngilizce bir argo kelimeden gelmektedir. Başlangıçta sadece 2 hafta içinde temel yapısı oluşturulmuş ve kısa sürede Linux çekirdeğinin geliştirilmesinde kullanılmaya başlanmıştır.</p>
+                    
+                    <div class="timeline">
+                        <div class="timeline-item" data-year="2005">
+                            <h4>Git'in Doğuşu</h4>
+                            <p>Linus Torvalds tarafından Linux çekirdeği için geliştirildi</p>
+                        </div>
+                        <div class="timeline-item" data-year="2008">
+                            <h4>GitHub'ın Kuruluşu</h4>
+                            <p>Git tabanlı proje barındırma servisi GitHub kuruldu</p>
+                        </div>
+                        <div class="timeline-item" data-year="2011">
+                            <h4>GitLab'ın Ortaya Çıkışı</h4>
+                            <p>Açık kaynaklı Git yönetim sistemi GitLab geliştirildi</p>
+                        </div>
+                        <div class="timeline-item" data-year="2018">
+                            <h4>Microsoft Dönemi</h4>
+                            <p>Microsoft, GitHub'ı 7.5 milyar dolara satın aldı</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-git-image" data-aos="fade-left">
+                    <div class="git-logo-animation">
+                        <img src="https://git-scm.com/images/logos/downloads/Git-Logo-2Color.png" alt="Git Logo" class="git-logo">
+                        <div class="git-features">
+                            <div class="feature-item">Hızlı</div>
+                            <div class="feature-item">Dağıtık</div>
+                            <div class="feature-item">Güvenli</div>
+                            <div class="feature-item">Esnek</div>
+                            <div class="feature-item">Açık Kaynak</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="neden-git">
+            <h2 class="section-title">Neden Git Kullanmalıyız?</h2>
+            <div class="benefits-container">
+                <div class="benefit-card" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="benefit-icon">
+                        <i class="fas fa-history"></i>
+                    </div>
+                    <h3>Versiyon Geçmişi</h3>
+                    <p>Git, projenizin tüm geçmişini saklar. Her değişiklik, kim tarafından ne zaman yapıldığı bilgisiyle birlikte kaydedilir. Bu sayede herhangi bir zamandaki projenizin durumuna geri dönebilirsiniz.</p>
+                </div>
+                <div class="benefit-card" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="benefit-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>İşbirliği</h3>
+                    <p>Birden fazla geliştirici aynı projede çalışırken, Git çakışmaları (conflict) yönetmeyi ve değişiklikleri birleştirmeyi kolaylaştırır. Ekip üyeleri aynı anda farklı özellikler üzerinde çalışabilir.</p>
+                </div>
+                <div class="benefit-card" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="benefit-icon">
+                        <i class="fas fa-code-branch"></i>
+                    </div>
+                    <h3>Dallanma Kolaylığı</h3>
+                    <p>Git'in güçlü dallanma mekanizması, yeni özellikleri ana koddan izole bir şekilde geliştirmenize olanak tanır. Bu, stabil bir ana kod tabanını korurken yeni özellikler eklemeyi mümkün kılar.</p>
+                </div>
+                <div class="benefit-card" data-aos="zoom-in" data-aos-delay="400">
+                    <div class="benefit-icon">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <h3>Dağıtık Yapı</h3>
+                    <p>Her geliştirici, projenin tam bir kopyasına sahiptir. Bu, internet bağlantısı olmadan bile çalışmaya devam edebilmenizi ve merkezi sunucu çökmesi durumunda veri kaybı yaşamamanızı sağlar.</p>
+                </div>
+                <div class="benefit-card" data-aos="zoom-in" data-aos-delay="500">
+                    <div class="benefit-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Veri Bütünlüğü</h3>
+                    <p>Git, her commit'in benzersiz bir hash değeriyle tanımlanmasını sağlayarak, projenizin bütünlüğünü korur. Bu, herhangi bir değişikliğin fark edilmeden yapılmasını imkansız hale getirir.</p>
+                </div>
+                <div class="benefit-card" data-aos="zoom-in" data-aos-delay="600">
+                    <div class="benefit-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3>Performans</h3>
+                    <p>Git, büyük projeler ve binlerce dal (branch) ile bile hızlı çalışacak şekilde tasarlanmıştır. Çoğu işlem yerel olarak gerçekleştiği için ağ gecikmesi yaşanmaz.</p>
+                </div>
+            </div>
+            <div class="git-vs-others" data-aos="fade-up">
+                <h3>Git vs Diğer Versiyon Kontrol Sistemleri</h3>
+                <div class="comparison-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Özellik</th>
+                                <th>Git</th>
+                                <th>SVN</th>
+                                <th>Mercurial</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Mimari</td>
+                                <td>Dağıtık</td>
+                                <td>Merkezi</td>
+                                <td>Dağıtık</td>
+                            </tr>
+                            <tr>
+                                <td>Çevrimdışı Çalışma</td>
+                                <td><i class="fas fa-check text-success"></i></td>
+                                <td><i class="fas fa-times text-danger"></i></td>
+                                <td><i class="fas fa-check text-success"></i></td>
+                            </tr>
+                            <tr>
+                                <td>Dallanma Performansı</td>
+                                <td>Çok Hızlı</td>
+                                <td>Yavaş</td>
+                                <td>Hızlı</td>
+                            </tr>
+                            <tr>
+                                <td>Öğrenme Eğrisi</td>
+                                <td>Orta</td>
+                                <td>Kolay</td>
+                                <td>Orta</td>
+                            </tr>
+                            <tr>
+                                <td>Topluluk Desteği</td>
+                                <td>Çok Geniş</td>
+                                <td>Orta</td>
+                                <td>Geniş</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="temel-komutlar">
+            <h2 class="section-title">Temel Git Komutları</h2>
+            <p class="section-description">Git'i kullanmaya başlamak için bilmeniz gereken temel komutlar aşağıda açıklanmıştır. Bu komutlar, günlük Git iş akışınızın temelini oluşturur.</p>
+            <div class="cards-container">
+                <div class="card" data-aos="fade-up">
+                    <div class="card-icon">
+                        <i class="fas fa-code-branch"></i>
+                    </div>
+                    <h3>git init</h3>
+                    <p>Yeni bir Git deposu oluşturur. Bu komut, mevcut bir dizini Git deposuna dönüştürerek versiyon kontrolü başlatır. Bu işlem, projenizin kök dizininde gizli bir <code>.git</code> klasörü oluşturur.</p>
+                    <div class="code-block">
+                        <pre><code>$ git init</code></pre>
+                    </div>
+                    <div class="terminal-animation">
+                        <div class="terminal-header">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                        </div>
+                        <div class="terminal-body">
+                            <p class="command">$ git init</p>
+                            <p class="response">Initialized empty Git repository in .git/</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="card-icon">
+                        <i class="fas fa-plus-circle"></i>
+                    </div>
+                    <h3>git add</h3>
+                    <p>Dosyaları hazırlama alanına (staging area) ekler. Bu, değişikliklerinizi bir sonraki commit için hazırlar. Belirli dosyaları eklemek için <code>git add dosya.txt</code> veya tüm değişiklikleri eklemek için <code>git add .</code> kullanabilirsiniz.</p>
+                    <div class="code-block">
+                        <pre><code>$ git add dosya.txt</code></pre>
+                    </div>
+                    <div class="terminal-animation">
+                        <div class="terminal-header">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                        </div>
+                        <div class="terminal-body">
+                            <p class="command">$ git add dosya.txt</p>
+                            <p class="response">Changes staged for commit</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="card-icon">
+                        <i class="fas fa-save"></i>
+                    </div>
+                    <h3>git commit</h3>
+                    <p>Hazırlama alanındaki değişiklikleri depoya kaydeder. Her commit, projenizin bir anlık görüntüsünü oluşturur ve benzersiz bir kimlik (hash) ile tanımlanır. İyi bir commit mesajı, değişikliğin amacını açıkça belirtmelidir.</p>
+                    <div class="code-block">
+                        <pre><code>$ git commit -m "Mesaj"</code></pre>
+                    </div>
+                    <div class="terminal-animation">
+                        <div class="terminal-header">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                        </div>
+                        <div class="terminal-body">
+                            <p class="command">$ git commit -m "İlk commit"</p>
+                            <p class="response">[main f7d2e3a] İlk commit</p>
+                            <p class="response">1 file changed, 10 insertions(+)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="card-icon">
+                        <i class="fas fa-info-circle"></i>
+                    </div>
+                    <h3>git status</h3>
+                    <p>Mevcut çalışma dizininin durumunu gösterir. Değişiklik yapılan, hazırlama alanına eklenen ve commit için hazır olan dosyaları listeler.</p>
+                    <div class="code-block">
+                        <pre><code>$ git status</code></pre>
+                    </div>
+                    <div class="terminal-animation">
+                        <div class="terminal-header">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                        </div>
+                        <div class="terminal-body">
+                            <p class="command">$ git status</p>
+                            <p class="response">On branch main</p>
+                            <p class="response">Changes to be committed:</p>
+                            <p class="response">  (use "git restore --staged &lt;file&gt;..." to unstage)</p>
+                            <p class="response">        modified:   index.html</p>
+                            <p class="response">Changes not staged for commit:</p>
+                            <p class="response">  (use "git add &lt;file&gt;..." to update what will be committed)</p>
+                            <p class="response">        modified:   style.css</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="card-icon">
+                        <i class="fas fa-upload"></i>
+                    </div>
+                    <h3>git push</h3>
+                    <p>Yerel depodaki commit'leri uzak depoya gönderir. Bu komut, yaptığınız değişiklikleri diğer geliştiricilerle paylaşmanızı sağlar.</p>
+                    <div class="code-block">
+                        <pre><code>$ git push origin main</code></pre>
+                    </div>
+                    <div class="terminal-animation">
+                        <div class="terminal-header">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                        </div>
+                        <div class="terminal-body">
+                            <p class="command">$ git push origin main</p>
+                            <p class="response">Enumerating objects: 5, done.</p>
+                            <p class="response">Counting objects: 100% (5/5), done.</p>
+                            <p class="response">Delta compression using up to 8 threads</p>
+                            <p class="response">Compressing objects: 100% (3/3), done.</p>
+                            <p class="response">Writing objects: 100% (3/3), 353 bytes | 353.00 KiB/s, done.</p>
+                            <p class="response">Total 3 (delta 2), reused 0 (delta 0)</p>
+                            <p class="response">remote: Resolving deltas: 100% (2/2), completed with 2 local objects.</p>
+                            <p class="response">To https://github.com/username/repo.git</p>
+                            <p class="response">   a1b2c3d..f7d2e3a  main -> main</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" data-aos="fade-up" data-aos-delay="500">
+                    <div class="card-icon">
+                        <i class="fas fa-download"></i>
+                    </div>
+                    <h3>git pull</h3>
+                    <p>Uzak depodaki değişiklikleri yerel deponuza çeker ve birleştirir. Bu komut, diğer geliştiricilerin yaptığı değişiklikleri kendi yerel kopyanıza almak için kullanılır.</p>
+                    <div class="code-block">
+                        <pre><code>$ git pull origin main</code></pre>
+                    </div>
+                    <div class="terminal-animation">
+                        <div class="terminal-header">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                        </div>
+                        <div class="terminal-body">
+                            <p class="command">$ git pull origin main</p>
+                            <p class="response">remote: Enumerating objects: 5, done.</p>
+                            <p class="response">remote: Counting objects: 100% (5/5), done.</p>
+                            <p class="response">remote: Compressing objects: 100% (2/2), done.</p>
+                            <p class="response">remote: Total 3 (delta 1), reused 3 (delta 1)</p>
+                            <p class="response">Unpacking objects: 100% (3/3), 340 bytes | 34.00 KiB/s, done.</p>
+                            <p class="response">From https://github.com/username/repo</p>
+                            <p class="response">   a1b2c3d..e5f6g7h  main       -> origin/main</p>
+                            <p class="response">Updating a1b2c3d..e5f6g7h</p>
+                            <p class="response">Fast-forward</p>
+                            <p class="response"> README.md | 5 +++++</p>
+                            <p class="response"> 1 file changed, 5 insertions(+)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="dallanma">
+            <h2 class="section-title">Dallanma (Branching)</h2>
+            <p class="section-description">Dallanma, Git'in en güçlü özelliklerinden biridir ve paralel geliştirmeyi mümkün kılar. Farklı dallar oluşturarak, ana kod tabanını etkilemeden yeni özellikler geliştirebilirsiniz.</p>
+            <div class="branching-container">
+                <div class="branching-info">
+                    <p>Git'in en güçlü özelliklerinden biri dallanma mekanizmasıdır. Dallanma, ana kod tabanından ayrı olarak yeni özellikler geliştirmenize olanak tanır. Bu, stabil bir ana dalı (genellikle <code>main</code> veya <code>master</code>) korurken, yeni özellikler veya hata düzeltmeleri üzerinde çalışmanızı sağlar.</p>
+                    <p>Dallanma stratejileri, projenizin ihtiyaçlarına göre değişebilir. Yaygın stratejiler arasında <strong>Git Flow</strong>, <strong>GitHub Flow</strong> ve <strong>GitLab Flow</strong> bulunur.</p>
+                    <div class="code-block">
+                        <pre><code>$ git branch yeni-ozellik
+$ git checkout yeni-ozellik</code></pre>
+                    </div>
+                    <p>veya tek komutla:</p>
+                    <div class="code-block">
+                        <pre><code>$ git checkout -b yeni-ozellik</code></pre>
+                    </div>
+                </div>
+                <div class="branching-animation">
+                    <div class="branch-container">
+                        <div class="main-branch-line">
+                            <div class="commit-dot" data-commit="1"></div>
+                            <div class="commit-dot" data-commit="2"></div>
+                            <div class="commit-dot" data-commit="3"></div>
+                            <div class="commit-dot" data-commit="6"></div>
+                            <div class="commit-dot" data-commit="7"></div>
+                        </div>
+                        <div class="feature-branch-line">
+                            <div class="commit-dot" data-commit="4"></div>
+                            <div class="commit-dot" data-commit="5"></div>
+                        </div>
+                        <div class="branch-labels">
+                            <div class="branch-label main">main</div>
+                            <div class="branch-label feature">feature</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="uzak-repo">
+            <h2 class="section-title">Uzak Depolar (Remote Repositories)</h2>
+            <p class="section-description">Uzak depolar, kodunuzu başkalarıyla paylaşmanızı ve işbirliği yapmanızı sağlar. GitHub, GitLab ve Bitbucket gibi platformlar, Git tabanlı uzak depo hizmetleri sunar.</p>
+            <div class="remote-container">
+                <div class="remote-animation">
+                    <div class="local-repo">
+                        <h4>Yerel Depo</h4>
+                        <div class="repo-files">
+                            <div class="file">index.html</div>
+                            <div class="file">style.css</div>
+                            <div class="file">app.js</div>
+                        </div>
+                    </div>
+                    <div class="transfer-animation">
+                        <div class="arrow push">
+                            <span class="arrow-line"></span>
+                            <span class="arrow-head"></span>
+                            <span class="arrow-label">git push</span>
+                        </div>
+                        <div class="arrow pull">
+                            <span class="arrow-line"></span>
+                            <span class="arrow-head"></span>
+                            <span class="arrow-label">git pull</span>
+                        </div>
+                    </div>
+                    <div class="remote-repo">
+                        <h4>Uzak Depo</h4>
+                        <div class="repo-files">
+                            <div class="file">index.html</div>
+                            <div class="file">style.css</div>
+                            <div class="file">app.js</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="remote-info">
+                    <h3>Uzak Depolarla Çalışma</h3>
+                    <p>Uzak depolar, kodunuzu başkalarıyla paylaşmanızı ve işbirliği yapmanızı sağlar. Uzak bir depo, internet veya ağ üzerinde barındırılan bir Git deposudur.</p>
+                    <p>En popüler Git barındırma hizmetleri arasında <strong>GitHub</strong>, <strong>GitLab</strong>, <strong>Bitbucket</strong> ve <strong>Azure DevOps</strong> bulunur. Bu platformlar, kod inceleme, sorun takibi ve sürekli entegrasyon gibi ek özellikler sunar.</p>
+                    
+                    <div class="remote-commands">
+                        <div class="remote-command">
+                            <h4><i class="fas fa-plus-circle"></i> Uzak Depo Ekleme</h4>
+                            <div class="code-block">
+                                <pre><code>$ git remote add origin https://github.com/kullanici/repo.git</code></pre>
+                            </div>
+                            <p>Bu komut, yerel deponuza "origin" adında bir uzak depo ekler. "origin" geleneksel olarak ana uzak depo için kullanılan isimdir, ancak istediğiniz herhangi bir ismi kullanabilirsiniz.</p>
+                        </div>
+                        
+                        <div class="remote-command">
+                            <h4><i class="fas fa-upload"></i> Değişiklikleri Gönderme (Push)</h4>
+                            <div class="code-block">
+                                <pre><code>$ git push -u origin main</code></pre>
+                            </div>
+                            <p>Bu komut, yerel "main" dalındaki değişiklikleri "origin" uzak deposuna gönderir. "-u" parametresi, gelecekteki push işlemleri için varsayılan uzak depo ve dalı ayarlar.</p>
+                        </div>
+                        
+                        <div class="remote-command">
+                            <h4><i class="fas fa-download"></i> Değişiklikleri Çekme (Pull)</h4>
+                            <div class="code-block">
+                                <pre><code>$ git pull origin main</code></pre>
+                            </div>
+                            <p>Bu komut, "origin" uzak deposundaki "main" dalındaki değişiklikleri yerel deponuza çeker ve birleştirir. Aslında bu komut, <code>git fetch</code> ve <code>git merge</code> komutlarının birleşimidir.</p>
+                        </div>
+                        
+                        <div class="remote-command">
+                            <h4><i class="fas fa-eye"></i> Uzak Depoları Görüntüleme</h4>
+                            <div class="code-block">
+                                <pre><code>$ git remote -v</code></pre>
+                            </div>
+                            <p>Bu komut, tüm uzak depoları ve URL'lerini listeler. "-v" parametresi "verbose" (ayrıntılı) anlamına gelir ve hem push hem de fetch URL'lerini gösterir.</p>
+                        </div>
+                        
+                        <div class="remote-command">
+                            <h4><i class="fas fa-sync-alt"></i> Uzak Depo Bilgilerini Güncelleme</h4>
+                            <div class="code-block">
+                                <pre><code>$ git remote set-url origin https://github.com/yeni-kullanici/repo.git</code></pre>
+                            </div>
+                            <p>Bu komut, mevcut bir uzak deponun URL'sini değiştirir. Örneğin, depo sahipliği değiştiğinde veya depo taşındığında kullanışlıdır.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="iş-akışı">
+            <h2 class="section-title">Git İş Akışı</h2>
+            <p class="section-description">Temel Git iş akışı, dosyalarınızı değiştirme, değişiklikleri hazırlama alanına ekleme, commit etme ve uzak depoya gönderme adımlarını içerir. Bu döngü, Git ile çalışmanın temelidir.</p>
+            <div class="workflow-container">
+                <div class="workflow-step" data-step="1">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Değişiklikler Yapın</h3>
+                        <p>Dosyalarınızı düzenleyin ve geliştirin.</p>
+                        <div class="step-detail">
+                            <p>Bu aşamada, projenizde gerekli değişiklikleri yapıyorsunuz. Yeni dosyalar oluşturabilir, mevcut dosyaları düzenleyebilir veya silebilirsiniz.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="workflow-arrow"></div>
+                <div class="workflow-step" data-step="2">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Değişiklikleri Ekleyin</h3>
+                        <p><code>git add</code> ile değişiklikleri hazırlama alanına ekleyin.</p>
+                        <div class="step-detail">
+                            <p>Değişiklikleri hazırlama alanına (staging area) eklemek, hangi değişikliklerin bir sonraki commit'e dahil edileceğini belirtir.</p>
+                            <div class="code-block">
+                                <pre><code>$ git add dosya.txt    # Belirli bir dosyayı ekle
+$ git add .          # Tüm değişiklikleri ekle</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="workflow-arrow"></div>
+                <div class="workflow-step" data-step="3">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Commit Edin</h3>
+                        <p><code>git commit</code> ile değişiklikleri kaydedin.</p>
+                        <div class="step-detail">
+                            <p>Commit, hazırlama alanındaki değişiklikleri projenizin geçmişine kaydeder. Her commit, benzersiz bir kimlik (hash) ile tanımlanır.</p>
+                            <div class="code-block">
+                                <pre><code>$ git commit -m "Açıklayıcı bir commit mesajı"</code></pre>
+                            </div>
+                            <p>Açıklayıcı ve anlaşılır commit mesajları yazmak, projenizin geçmişini daha iyi anlamak için çok önemlidir.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="workflow-arrow"></div>
+                <div class="workflow-step" data-step="4">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Push Edin</h3>
+                        <p><code>git push</code> ile değişiklikleri uzak depoya gönderin.</p>
+                        <div class="step-detail">
+                            <p>Bu adım, yerel deponuzdaki commit'leri uzak depoya gönderir, böylece diğer geliştiriciler değişikliklerinizi görebilir ve çekebilir.</p>
+                            <div class="code-block">
+                                <pre><code>$ git push origin main</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    <section class="section" id="git-ipuclari">
+        <h2 class="section-title">Git İpuçları ve En İyi Uygulamalar</h2>
+        <p class="section-description">Git'i daha etkili kullanmanıza yardımcı olacak bazı ipuçları ve en iyi uygulamaları derledik.</p>
+        
+        <div class="tips-container">
+            <div class="tip-card" data-aos="flip-left">
+                <div class="tip-icon">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <h3>Anlamlı Commit Mesajları Yazın</h3>
+                <p>Commit mesajlarınız, değişikliğin ne yaptığını ve neden yapıldığını açıkça belirtmelidir. İyi bir format şöyledir:</p>
+                <div class="code-block">
+                    <pre><code>Kısa özet (50 karakter veya daha az)
+
+Daha detaylı açıklama. Gerekirse birden fazla
+paragraf kullanabilirsiniz. Satırları yaklaşık
+72 karakterde kesin.</code></pre>
+                </div>
+            </div>
+            
+            <div class="tip-card" data-aos="flip-left" data-aos-delay="100">
+                <div class="tip-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <h3>Sık Sık Commit Yapın</h3>
+                <p>Küçük, mantıklı parçalar halinde sık sık commit yapmak, değişiklikleri takip etmeyi kolaylaştırır ve sorun çıktığında belirli bir noktaya geri dönmeyi mümkün kılar.</p>
+            </div>
+            
+            <div class="tip-card" data-aos="flip-left" data-aos-delay="200">
+                <div class="tip-icon">
+                    <i class="fas fa-tasks"></i>
+                </div>
+                <h3>.gitignore Dosyası Kullanın</h3>
+                <p>Geçici dosyaları, derleme çıktılarını, kişisel IDE ayarlarını ve hassas bilgileri içeren dosyaları izlememek için bir .gitignore dosyası oluşturun.</p>
+                <div class="code-block">
+                    <pre><code># Örnek .gitignore içeriği
+node_modules/
+*.log
+.env
+.DS_Store
+.idea/</code></pre>
+                </div>
+            </div>
+            
+            <div class="tip-card" data-aos="flip-left" data-aos-delay="300">
+                <div class="tip-icon">
+                    <i class="fas fa-tag"></i>
+                </div>
+                <h3>Sürümleri Etiketleyin</h3>
+                <p>Sürüm numaralarını veya önemli noktaları etiketlemek, daha sonra bu noktalara kolayca erişmenizi sağlar.</p>
+                <div class="code-block">
+                    <pre><code>$ git tag -a v1.0.0 -m "Sürüm 1.0.0"
+$ git push origin v1.0.0</code></pre>
+                </div>
+            </div>
+            
+            <div class="tip-card" data-aos="flip-left" data-aos-delay="400">
+                <div class="tip-icon">
+                    <i class="fas fa-code"></i>
+                </div>
+                <h3>Dallanma Stratejinizi Belirleyin</h3>
+                <p>Projeniz için uygun bir dallanma stratejisi belirleyin ve ekip üyelerinizin buna uymasını sağlayın. Bu, kod tabanınızın düzenli ve yönetilebilir kalmasına yardımcı olur.</p>
+            </div>
+            
+            <div class="tip-card" data-aos="flip-left" data-aos-delay="500">
+                <div class="tip-icon">
+                    <i class="fas fa-history"></i>
+                </div>
+                <h3>Geçmişi Yeniden Yazarken Dikkatli Olun</h3>
+                <p>Git, geçmişi değiştirmenize olanak tanır (<code>git rebase</code>, <code>git commit --amend</code>), ancak bu, zaten paylaşılmış commitler için sorunlara neden olabilir. Paylaşılmış dalların geçmişini yeniden yazmaktan kaçının.</p>
+            </div>
+        </div>
+    </section>
+    </main>
+
+    <footer>
+        <div class="footer-wave">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#24292e" fill-opacity="1" d="M0,160L48,154.7C96,149,192,139,288,154.7C384,171,480,213,576,218.7C672,224,768,192,864,181.3C960,171,1056,181,1152,192C1248,203,1344,213,1392,218.7L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>
+        </div>
+        
+        <div class="footer-content">
+            <div class="footer-left">
+                <div class="footer-logo">
+                    <i class="fab fa-git-alt"></i>
+                    <span>Git <span class="highlight">Öğreticisi</span></span>
+                </div>
+                <p>Modern yazılım geliştirmenin temel taşı olan Git hakkında kapsamlı bir rehber. Versiyon kontrolü, işbirliği ve kod yönetimi hakkında her şey.</p>
+            </div>
+            
+            <div class="footer-nav">
+                <div class="footer-nav-column">
+                    <h4>Temel Bilgiler</h4>
+                    <ul>
+                        <li><a href="#giris">Giriş</a></li>
+                        <li><a href="#git-nedir">Git Nedir</a></li>
+                        <li><a href="#neden-git">Neden Git</a></li>
+                        <li><a href="#temel-komutlar">Temel Komutlar</a></li>
+                    </ul>
+                </div>
+                <div class="footer-nav-column">
+                    <h4>Gelişmiş Konular</h4>
+                    <ul>
+                        <li><a href="#dallanma">Dallanma</a></li>
+                        <li><a href="#uzak-repo">Uzak Repo</a></li>
+                        <li><a href="#iş-akışı">İş Akışı</a></li>
+                        <li><a href="#git-ipuclari">İpuçları</a></li>
+                    </ul>
+                </div>
+                <div class="footer-nav-column">
+                    <h4>Kaynaklar</h4>
+                    <ul>
+                        <li><a href="https://git-scm.com/doc" target="_blank">Resmi Dokümantasyon</a></li>
+                        <li><a href="https://github.com" target="_blank">GitHub</a></li>
+                        <li><a href="https://gitlab.com" target="_blank">GitLab</a></li>
+                        <li><a href="https://bitbucket.org" target="_blank">Bitbucket</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="footer-bottom-content">
+                <p>&copy; 2025 Git Öğreticisi | Tüm hakları saklıdır</p>
+    </footer>
+
+    <!-- Floating Game Button -->
+    <a href="git-oyunu.html" class="game-float-button" aria-label="Git Oyunu">
+        <i class="fas fa-gamepad"></i>
+        <span class="game-tooltip">Git Oyunu</span>
+    </a>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/git-game.js"></script>
+</body>
+</html>

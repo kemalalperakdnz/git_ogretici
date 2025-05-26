@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Git Oyunu - Git Öğreticisi</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/git-game.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="game-page">
+    <header>
+        <nav>
+            <div class="logo">
+                <i class="fab fa-git-alt"></i>
+                <span>Git Öğreticisi</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Ana Sayfa</a></li>
+                <li><a href="index.html#git-nedir">Git Nedir</a></li>
+                <li><a href="index.html#neden-git">Neden Git</a></li>
+                <li><a href="index.html#temel-komutlar">Temel Komutlar</a></li>
+                <li><a href="index.html#dallanma">Dallanma</a></li>
+                <li><a href="index.html#uzak-repo">Uzak Repo</a></li>
+            </ul>
+            <div class="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="game-hero">
+            <div class="game-hero-content">
+                <h1>Git Oyunu</h1>
+                <p>Git komutlarını interaktif bir ortamda öğrenin ve pratik yapın.</p>
+            </div>
+        </section>
+
+        <section class="game-container">
+            <div class="game-layout">
+                <!-- Terminal Bölümü - Öne Çıkarıldı -->
+                <div class="terminal-section">
+                    <h2>Git Terminal</h2>
+                    <p class="terminal-description">Aşağıdaki terminale Git komutlarını yazarak Git'i öğrenin. Komutların etkisini sağ taraftaki görselleştirmede görebilirsiniz.</p>
+                    
+                    <div class="terminal">
+                        <div class="terminal-header">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                            <span class="terminal-title">Git Terminal</span>
+                        </div>
+                        <div class="terminal-body" id="terminal-output">
+                            <!-- Terminal çıktısı JavaScript tarafından eklenecek -->
+                        </div>
+                        <div class="terminal-input-container">
+                            <span class="prompt">$</span>
+                            <input type="text" id="terminal-input" placeholder="Git komutunu yazın..." autocomplete="off">
+                        </div>
+                    </div>
+                    
+                    <div class="terminal-help">
+                        <h4>Hızlı Komut Referansı:</h4>
+                        <div class="command-shortcuts">
+                            <span class="command-tag" data-command="git init">git init</span>
+                            <span class="command-tag" data-command="git status">git status</span>
+                            <span class="command-tag" data-command="git add .">git add .</span>
+                            <span class="command-tag" data-command="git commit -m &quot;mesaj&quot;">git commit</span>
+                            <span class="command-tag" data-command="git branch">git branch</span>
+                            <span class="command-tag" data-command="git checkout main">git checkout</span>
+                            <span class="command-tag" data-command="git merge">git merge</span>
+                            <span class="command-tag" data-command="git log">git log</span>
+                            <span class="command-tag" data-command="help">yardım</span>
+                            <span class="command-tag" data-command="clear">temizle</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Görselleştirme Bölümü -->
+                <div class="visualization-section">
+                    <div class="game-sidebar">
+                        <div class="level-selector">
+                            <h3>Seviyeler</h3>
+                            <ul id="level-list">
+                                <li class="level active" data-level="1">Seviye 1: Git Başlangıç</li>
+                                <li class="level" data-level="2">Seviye 2: Commit İşlemleri</li>
+                                <li class="level" data-level="3">Seviye 3: Dallanma</li>
+                                <li class="level" data-level="4">Seviye 4: Birleştirme</li>
+                                <li class="level" data-level="5">Seviye 5: Uzak Repolar</li>
+                            </ul>
+                        </div>
+                        <div class="game-instructions">
+                            <h3>Talimatlar</h3>
+                            <div id="level-instructions" class="instructions-text">
+                                <p>Git komutlarını kullanarak verilen görevleri tamamlayın. Her seviye, Git'in farklı özelliklerini öğrenmenize yardımcı olacak.</p>
+                                <p>Başlamak için sol taraftaki seviyelerden birini seçin.</p>
+                            </div>
+                        </div>
+                        <div class="game-score">
+                            <h3>Puan: <span id="score">0</span></h3>
+                        </div>
+                        <div class="game-controls">
+                            <button id="hint-btn" class="game-btn"><i class="fas fa-lightbulb"></i> İpucu</button>
+                            <button id="reset-btn" class="game-btn"><i class="fas fa-redo"></i> Sıfırla</button>
+                            <button id="next-btn" class="game-btn" disabled><i class="fas fa-forward"></i> Sonraki</button>
+                        </div>
+                    </div>
+                    
+                    <div class="game-main">
+                        <div class="git-visualization">
+                            <div class="working-directory">
+                                <h3>Çalışma Dizini</h3>
+                                <div class="file-list" id="working-files">
+                                    <!-- Dosyalar JavaScript tarafından eklenecek -->
+                                </div>
+                            </div>
+                            
+                            <div class="staging-area">
+                                <h3>Hazırlama Alanı</h3>
+                                <div class="file-list" id="staged-files">
+                                    <!-- Dosyalar JavaScript tarafından eklenecek -->
+                                </div>
+                            </div>
+                            
+                            <div class="repository">
+                                <h3>Repo</h3>
+                                <div class="commit-history" id="commit-history">
+                                    <!-- Commit'ler JavaScript tarafından eklenecek -->
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="branch-visualization">
+                            <h3>Dallar</h3>
+                            <div class="branch-tree" id="branch-tree">
+                                <!-- Dallar JavaScript tarafından eklenecek -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="game-help">
+            <h2>Git Komut Rehberi</h2>
+            <div class="command-cards">
+                <div class="command-card">
+                    <h3>Temel Komutlar</h3>
+                    <ul>
+                        <li><code>git init</code> - Yeni bir Git deposu oluşturur</li>
+                        <li><code>git status</code> - Çalışma dizininin durumunu gösterir</li>
+                        <li><code>git add &lt;dosya&gt;</code> - Dosyayı hazırlama alanına ekler</li>
+                        <li><code>git commit -m "mesaj"</code> - Değişiklikleri kaydeder</li>
+                    </ul>
+                </div>
+                
+                <div class="command-card">
+                    <h3>Dal Komutları</h3>
+                    <ul>
+                        <li><code>git branch</code> - Mevcut dalları listeler</li>
+                        <li><code>git branch &lt;dal-adı&gt;</code> - Yeni bir dal oluşturur</li>
+                        <li><code>git checkout &lt;dal-adı&gt;</code> - Belirtilen dala geçer</li>
+                        <li><code>git merge &lt;dal-adı&gt;</code> - Belirtilen dalı mevcut dala birleştirir</li>
+                    </ul>
+                </div>
+                
+                <div class="command-card">
+                    <h3>Uzak Repo Komutları</h3>
+                    <ul>
+                        <li><code>git remote add &lt;ad&gt; &lt;url&gt;</code> - Uzak repo ekler</li>
+                        <li><code>git push &lt;uzak&gt; &lt;dal&gt;</code> - Değişiklikleri uzak repoya gönderir</li>
+                        <li><code>git pull &lt;uzak&gt; &lt;dal&gt;</code> - Değişiklikleri uzak repodan çeker</li>
+                        <li><code>git clone &lt;url&gt;</code> - Uzak repoyu klonlar</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-wave">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#24292e" fill-opacity="1" d="M0,160L48,154.7C96,149,192,139,288,154.7C384,171,480,213,576,218.7C672,224,768,192,864,181.3C960,171,1056,181,1152,192C1248,203,1344,213,1392,218.7L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>
+        </div>
+        
+        <div class="footer-content">
+            <div class="footer-left">
+                <div class="footer-logo">
+                    <i class="fab fa-git-alt"></i>
+                    <span>Git <span class="highlight">Öğreticisi</span></span>
+                </div>
+                <p>Modern yazılım geliştirmenin temel taşı olan Git hakkında kapsamlı bir rehber. Versiyon kontrolü, işbirliği ve kod yönetimi hakkında her şey.</p>
+            </div>
+            
+            <div class="footer-nav">
+                <div class="footer-nav-column">
+                    <h4>Temel Bilgiler</h4>
+                    <ul>
+                        <li><a href="index.html#giris">Giriş</a></li>
+                        <li><a href="index.html#git-nedir">Git Nedir</a></li>
+                        <li><a href="index.html#neden-git">Neden Git</a></li>
+                        <li><a href="index.html#temel-komutlar">Temel Komutlar</a></li>
+                    </ul>
+                </div>
+                <div class="footer-nav-column">
+                    <h4>Gelişmiş Konular</h4>
+                    <ul>
+                        <li><a href="index.html#dallanma">Dallanma</a></li>
+                        <li><a href="index.html#uzak-repo">Uzak Repo</a></li>
+                        <li><a href="index.html#iş-akışı">İş Akışı</a></li>
+                        <li><a href="index.html#git-ipuclari">İpuçları</a></li>
+                    </ul>
+                </div>
+                <div class="footer-nav-column">
+                    <h4>Kaynaklar</h4>
+                    <ul>
+                        <li><a href="https://git-scm.com/doc" target="_blank">Resmi Dokümantasyon</a></li>
+                        <li><a href="https://github.com" target="_blank">GitHub</a></li>
+                        <li><a href="https://gitlab.com" target="_blank">GitLab</a></li>
+                        <li><a href="https://bitbucket.org" target="_blank">Bitbucket</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="footer-bottom-content">
+                <p>&copy; 2025 Git Öğreticisi | Tüm hakları saklıdır</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script src="js/git-game.js"></script>
+</body>
+</html>
